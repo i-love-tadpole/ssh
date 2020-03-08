@@ -9,6 +9,7 @@ EXPOSE 22
 RUN apt update \
  && apt install -y openssh-server \
  && mkdir /root/.ssh \
+ && ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa \
  && sed -i "s/#X11UseLocalhost yes/X11UseLocalhost no/g" /etc/ssh/sshd_config \
  && echo '#!/bin/bash\n\
 test -f /root/.ssh/authorized_keys || echo "${ID_PUB}" > /root/.ssh/authorized_keys\n\
